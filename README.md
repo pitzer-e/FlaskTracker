@@ -70,3 +70,20 @@ Git updates to the remote-Git repository location via commit/push
 actions through local IDE's (i.e, PyCharm).
 
 ### 2021-05-25, Updated Libraries and SQLAlchemy
+
+This was a large and vital update for the FlaskTracker project. The virtual
+environment directory was updated to include the flask-sqlalchemy library, so
+that the SQLAlchemy object could be called during the creation of the SQLite3
+database. Additionally, in order to accommodate this, the virtual environment
+needed to reflect changes to the underlying python libraries. Python 2.7 was
+retired in January 2021, and as such, no longer included updates to the flask
+sqlalchemy packages. <br><br><b>Because of this, pip3 (Python3 package handler) was
+used to re-package the underlying python dependencies so that the latest
+(currently 3.9) Python development environment can be used.</b><br><br>
+Following this Python update, the latest flask-sqlalchemy libraries were
+packaged and included into this update of FlaskTracker.  A new HTML5 file
+was created 'base.html', which is to be used as the extended template for
+other HTML pages to include. This helps create a more modular environment,
+and allows for cleaner web-side development. Jinja2 templating has begun
+inclusion at this point of development, and was used to provide url linking
+to the var_bar tables for maneuvering throughout the website.
