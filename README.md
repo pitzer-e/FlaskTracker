@@ -42,8 +42,7 @@ The initial commit saw the creation of the Git repository. The
 FlaskTracker project includes all necessary libraries and
 packages for the application to function.  The initial HTML files
 were created for the project using BootStrap templates, and a
-simple .py file was created for app definition and imports.
--Ethan
+simple .py file was created for app definition and imports. -Ethan
 
 ### 2021-05-19, New HTML & Documentation
 
@@ -67,7 +66,7 @@ to the new repository was sent out to teammates on 2021-05-24 to
 ensure continued and updated access to the working project
 repository. The rebuild is intended to allow for better linked
 Git updates to the remote-Git repository location via commit/push
-actions through local IDE's (i.e, PyCharm).
+actions through local IDE's (i.e, PyCharm). -Ethan
 
 ### 2021-05-25, Updated Libraries and SQLAlchemy
 
@@ -86,4 +85,4 @@ was created 'base.html', which is to be used as the extended template for
 other HTML pages to include. This helps create a more modular environment,
 and allows for cleaner web-side development. Jinja2 templating has begun
 inclusion at this point of development, and was used to provide url linking
-to the var_bar tables for maneuvering throughout the website.
+to the var_bar tables for maneuvering throughout the website. -Ethan
