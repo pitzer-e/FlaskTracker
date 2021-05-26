@@ -19,16 +19,22 @@ There are two primary users in mind with this application:
 * The system administrator
 
 #### Standard User
-The standard user should be able to register for an account that they will be able to log in to the application with
-in order to enter data for themselves. They should only be able to view their own data, and enter locations that they
-have visited themselves. No viewing of others data, or entering of data for others. The standard can also generate a
-report of the places that they have been, and what their chance might be depending on the infection chance of the
-locations that they have visited were.
+A standard user is able to register for an account that they will be able to log in to the application with. 
+They are able to view their own data, and enter locations that they have visited themselves. They can't view others 
+data, or enter data for others. They can also generate a report of the places that they have been, and what their 
+chance of infection might be depending on the infection chance of the locations they visited.
 
 #### System Administrator
-The system administrator is the user which is built into the system for administration purposes. The admin user is able
-to change whether a standard user is infected or not, and can also change the chance of infection for any of the given
+The system administrator is the user which is built into the system for administration purposes. They are able
+to change whether a standard user is infected or not, and can also alter the chance of infection for any of the given
 locations.
+
+#### Running the Application
+The program can be called by navigating to the working directory and calling:<br>
+
+    /../FlaskTracker/python3 run.py
+
+Or by using and IDE such as PyCharm, and running the program using the Run 'FlaskTracker' button.
 
 ## Updates
 This section is intended to be used as an area to communicate how major changes are handled within the framework of the
