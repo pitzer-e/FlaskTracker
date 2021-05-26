@@ -30,11 +30,11 @@ to change whether a standard user is infected or not, and can also alter the cha
 locations.
 
 #### Running the Application
-The program can be called by navigating to the working directory and calling:<br>
+The program can be run by navigating to the working directory and calling:
 
     /../FlaskTracker/python3 run.py
 
-Or by using and IDE such as PyCharm, and running the program using the Run 'FlaskTracker' button.
+Or by using an IDE such as PyCharm and running the program using the Run 'FlaskTracker' button.
 
 ## Updates
 This section is intended to be used as an area to communicate how major changes are handled within the framework of the
@@ -44,4 +44,8 @@ to project contributions.
 
 #### Formatting
 * It is recommended that commit updates adhere the following format:  <i>year-month-day, summary of update
-</i><br>
+</i>
+  
+#### Suggested tools
+* <https://sqlitebrowser.org>
+* <https://www.jetbrains.com/pycharm/>
