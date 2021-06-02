@@ -16,7 +16,6 @@
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Infected</th>
-            <th scope="col">Chance Infected</th>
             <th scope="col">Options</th>
         </tr>
         </thead>
@@ -24,12 +23,11 @@
         <!-- Your rows inside the table HERE: -->
         {% for user in users %}
             <tr>
-                <td>{{ user.user_id }}</td>
-                <td>{{ user.user_name }}</td>
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.last_name }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first }}</td>
+                <td>{{ user.last }}</td>
                 <td>{{ user.is_infected }}</td>
-                <td>{{ user.probability_infection }}</td>
                 <td>
                     <button class="btn btn-outline btn-info">Set Infected</button>
                     <button class="btn btn-outline btn-success">Set Uninfected</button>

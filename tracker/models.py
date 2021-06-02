@@ -1,15 +1,20 @@
-from tracker import db
+from tracker import db, login_manager
 from tracker import bcrypt
+from flask_login import UserMixin
 
 
-class User(db.Model):
-    first_name = db.Column(db.String(length=30), nullable=False)
-    last_name = db.Column(db.String(length=30), nullable=False)
-    user_name = db.Column(db.String(length=30), nullable=False, unique=True)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
+    first = db.Column(db.String(length=30), nullable=False)
+    last = db.Column(db.String(length=30), nullable=False)
+    username = db.Column(db.String(length=30), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_infected = db.Column(db.Boolean(), nullable=False, default=False)
-    probability_infection = db.Column(db.Float(), default=0.0)
-    user_id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.Integer(), primary_key=True)
 
     @property
     def password(self):
@@ -18,6 +23,9 @@ class User(db.Model):
     @password.setter
     def password(self, plain_text_password):
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    def check_password(self, attempted_password):
+        return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
 class Location(db.Model):
