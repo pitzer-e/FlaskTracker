@@ -36,14 +36,14 @@ The program can be run by navigating to the working directory and calling:
 
 Or by using an IDE such as PyCharm and running the program using the Run 'FlaskTracker' button.
 
-## Updates
+## Misc
 This section is intended to be used as an area to communicate how major changes are handled within the framework of the
 project. The sections included are intended to be used to help provide a more uniform approach to the documentation
 that can be found in commit uploads and ReadMe edits. These guidelines are suggested to provide a uniform approach 
 to project contributions.
 
 #### Formatting
-* It is recommended that commit updates adhere the following format:  <i>year-month-day, summary of update
+* The commit updates follow the following format:  <i>year-month-day, summary of update
 </i>
   
 #### Suggested tools
