@@ -1,6 +1,7 @@
 from tracker import app
 from flask import render_template
 from tracker.models import User
+from tracker.forms import RegisterForm
 
 
 @app.route('/')
@@ -23,3 +24,8 @@ def report_page():
 def admin_page():
     users = User.query.all()
     return render_template('admin.html', users=users)
+
+@app.route('/register')
+def register_page():
+    form = RegisterForm()
+    return render_template('register.html', form=form)
