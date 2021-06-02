@@ -1,4 +1,5 @@
 from tracker import db
+from tracker import bcrypt
 
 
 class User(db.Model):
@@ -8,6 +9,14 @@ class User(db.Model):
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_infected = db.Column(db.Boolean(), nullable=False, default=False)
     user_id = db.Column(db.Integer(), primary_key=True)
+
+    @property
+    def password(self):
+        return self.password
+
+    @password.setter
+    def password(self, plain_text_password):
+        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
 
 class Location(db.Model):
