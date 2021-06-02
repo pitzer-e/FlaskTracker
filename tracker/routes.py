@@ -30,6 +30,7 @@ def admin_page():
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     form = RegisterForm()
+
     if form.validate_on_submit():
         user_to_create = User(user_name=form.user_name.data,
                               first_name=form.first_name.data,
@@ -38,6 +39,12 @@ def register_page():
 
         db.session.add(user_to_create)
         db.session.commit()
+
         return redirect(url_for('home_page'))
+
+    #   if there are no errors from the validations
+    if form.errors != {}:
+        for err_msg in form.errors.values():
+            print(f'There was an error with creating a user: {err_msg}')
 
     return render_template('register.html', form=form)
