@@ -34,7 +34,11 @@ The program can be run by navigating to the working directory and calling:
 
     /../FlaskTracker/python3 run.py
 
-Or by using an IDE such as PyCharm and running the program using the Run 'FlaskTracker' button.
+Or by using an IDE such as PyCharm and running the program using the 'Run FlaskTracker' button. This may require some
+setting changes in the PyCharm run configuration. <br><br>
+Edit the FlaskTracker configuration by changing the FlaskTracker Run/Debug configuration to target the following path:
+    
+    ../FlaskTracker/run.py
 
 ## Misc
 This section is intended to be used as an area to communicate how major changes are handled within the framework of the

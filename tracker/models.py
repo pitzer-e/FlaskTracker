@@ -8,6 +8,7 @@ class User(db.Model):
     user_name = db.Column(db.String(length=30), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_infected = db.Column(db.Boolean(), nullable=False, default=False)
+    probability_infection = db.Column(db.Float(), default=0.0)
     user_id = db.Column(db.Integer(), primary_key=True)
 
     @property

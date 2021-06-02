@@ -1,7 +1,7 @@
 from tracker import app
 from flask import render_template, redirect, url_for, flash
 from tracker.models import User
-from tracker.forms import RegisterForm
+from tracker.forms import RegisterForm, LoginForm
 from tracker import db
 
 
@@ -48,3 +48,9 @@ def register_page():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
 
     return render_template('register.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    form = LoginForm()
+    return render_template('login.html', form=form)
