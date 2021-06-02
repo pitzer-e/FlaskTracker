@@ -5,7 +5,7 @@ class User(db.Model):
     first_name = db.Column(db.String(length=30), nullable=False)
     last_name = db.Column(db.String(length=30), nullable=False)
     user_name = db.Column(db.String(length=30), nullable=False, unique=True)
-    user_password = db.Column(db.String(length=30))
+    password_hash = db.Column(db.String(length=60), nullable=False)
     is_infected = db.Column(db.Boolean(), nullable=False, default=False)
     user_id = db.Column(db.Integer(), primary_key=True)
 
