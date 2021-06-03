@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login_page"
+login_manager.login_message_category = "info"
 
 #   This import is required at the end of the file. It prevents circular calling and provides context for routes.
 from tracker import routes

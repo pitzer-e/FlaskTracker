@@ -1,28 +1,168 @@
 {% extends 'base.html' %}
 
-<!-- The Title of the Web Page -->
 {% block title %}
-    Data Entry Page
+Data Page
 {% endblock %}
 
-<!-- All of the content for the Data Entry HTML Page -->
 {% block content %}
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Locations
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Wal-Mart</a>
-            <a class="dropdown-item" href="#">Safeway</a>
-            <a class="dropdown-item" href="#">Fitness Center</a>
-            <a class="dropdown-item" href="#">Eastern Oregon University</a>
-            <a class="dropdown-item" href="#">Public Pool</a>
-            <a class="dropdown-item" href="#">Lighthouse Church</a>
-            <a class="dropdown-item" href="#">D&B Supply</a>
-            <a class="dropdown-item" href="#">Granada Theatre</a>
-            <a class="dropdown-item" href="#">Riverside Park</a>
-            <a class="dropdown-item" href="#">The Denture Lady</a>
-        </div>
-    </div>
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: white}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
 
-{%  endblock %}
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="bootstrap-iso">
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <form method="post">
+     <div class="form-group ">
+      <label class="control-label requiredField" for="Location">
+       Choose A Location
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <select class="select form-control" id="Location" name="Location">
+       <option value="Eastern Oregon University">
+        Eastern Oregon University
+       </option>
+       <option value="Anytime Fitness">
+        Anytime Fitness
+       </option>
+       <option value="Safeway">
+        Safeway
+       </option>
+       <option value="D&amp;B Supply">
+        D&amp;B Supply
+       </option>
+       <option value="Wal-Mart">
+        Wal-Mart
+       </option>
+       <option value="Bi-Mart">
+        Bi-Mart
+       </option>
+       <option value="Riverside Park">
+        Riverside Park
+       </option>
+       <option value="Granada Theatre">
+        Granada Theatre
+       </option>
+       <option value="Public Pool">
+        Public Pool
+       </option>
+       <option value="Max Square">
+        Max Square
+       </option>
+      </select>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="date">
+       Date
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="Hour">
+       Select Hour
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <select class="select form-control" id="Hour" name="Hour">
+       <option value="12">
+        12
+       </option>
+       <option value="11">
+        11
+       </option>
+       <option value="10">
+        10
+       </option>
+       <option value="09">
+        09
+       </option>
+       <option value="08">
+        08
+       </option>
+       <option value="07">
+        07
+       </option>
+       <option value="06">
+        06
+       </option>
+       <option value="05">
+        05
+       </option>
+       <option value="04">
+        04
+       </option>
+       <option value="03">
+        03
+       </option>
+       <option value="02">
+        02
+       </option>
+       <option value="01">
+        01
+       </option>
+      </select>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField" for="Min">
+       Select Min
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <select class="select form-control" id="Min" name="Min">
+       <option value="00">
+        00
+       </option>
+       <option value="15">
+        15
+       </option>
+       <option value="30">
+        30
+       </option>
+       <option value="45">
+        45
+       </option>
+      </select>
+     </div>
+     <div class="form-group ">
+      <label class="control-label requiredField">
+       Time of Day
+       <span class="asteriskField">
+        *
+       </span>
+      </label>
+      <div class="">
+       <div class="radio">
+        <label class="radio">
+         <input name="radio" type="radio" value="AM"/>
+         AM
+        </label>
+       </div>
+       <div class="radio">
+        <label class="radio">
+         <input name="radio" type="radio" value="PM"/>
+         PM
+        </label>
+       </div>
+      </div>
+     </div>
+     <div class="form-group">
+      <div>
+       <button class="btn btn-primary " name="submit" type="submit">
+        Submit
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

@@ -43,6 +43,8 @@ def register_page():
 
         db.session.add(user_to_create)
         db.session.commit()
+        login_user(user_to_create)
+        flash(f'Account creation successful! You are now logged in as {user_to_create.username}', category='success')
 
         return redirect(url_for('home_page'))
 
@@ -79,5 +81,5 @@ def login_page():
 def logout_page():
     logout_user()
     flash('You have been logged out!', category='info')
-    redirect(url_for('home_page'))
+    return redirect(url_for('home_page'))
 
