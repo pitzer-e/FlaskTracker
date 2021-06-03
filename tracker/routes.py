@@ -1,7 +1,7 @@
 from tracker import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from tracker.models import User
-from tracker.forms import RegisterForm, LoginForm
+from tracker.forms import RegisterForm, LoginForm, EnterDataForm
 from tracker import db
 from flask_login import login_user, logout_user, login_required
 
@@ -12,10 +12,13 @@ def home_page():
     return render_template('home.html')
 
 
-@app.route('/data')
+@app.route('/data', methods=['GET', 'POST'])
 @login_required
 def data_page():
-    return render_template('data.html')
+    data_form = EnterDataForm()
+    if data_form.validate_on_submit():
+        print(request.form)
+    return render_template('data.html', data_form=data_form)
 
 
 @app.route('/report')
