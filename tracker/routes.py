@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash
 from tracker.models import User
 from tracker.forms import RegisterForm, LoginForm
 from tracker import db
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 
 
 @app.route('/')
@@ -13,16 +13,19 @@ def home_page():
 
 
 @app.route('/data')
+@login_required
 def data_page():
     return render_template('data.html')
 
 
 @app.route('/report')
+@login_required
 def report_page():
     return render_template('report.html')
 
 
 @app.route('/admin')
+@login_required
 def admin_page():
     users = User.query.all()
     return render_template('admin.html', users=users)
@@ -70,3 +73,11 @@ def login_page():
             flash('Username and password do not match. Please try again', category='danger')
 
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout_page():
+    logout_user()
+    flash('You have been logged out!', category='info')
+    redirect(url_for('home_page'))
+

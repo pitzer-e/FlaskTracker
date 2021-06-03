@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = '3ec7142bf14425b34e3e3746'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+login_manager.login_view = "login_page"
 
 #   This import is required at the end of the file. It prevents circular calling and provides context for routes.
 from tracker import routes
