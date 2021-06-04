@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block title %} Data Page {% endblock %} {% block content %}
+
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>
 .bootstrap-iso .formden_header h2,
@@ -19,16 +20,19 @@
 </style>
 <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
 <div class="bootstrap-iso bg-dark" style="margin-top: 40px; margin-left: 40px; margin-right: 40px">
-<h2>Please Fill out the Following Form</h2>
+	<h2>Please Fill out the Following Form</h2>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<form method="POST">
                     {{ data_form.hidden_tag() }}
+
 					<div class="form-group ">
-						<label class="control-label requiredField" for="Location"> Choose A Location <span class="asteriskField">
+						<label class="control-label requiredField" for="Location"> Choose A Location
+							<span class="asteriskField">
         *
-       </span> </label>
+       </span>
+						</label>
 						<select class="select form-control" id="Location" name="Location">
 							<option value="Eastern Oregon University"> Eastern Oregon University </option>
 							<option value="Anytime Fitness"> Anytime Fitness </option>
@@ -43,15 +47,32 @@
 						</select>
 					</div>
 					<div class="form-group ">
-						<label class="control-label requiredField" for="date"> Date <span class="asteriskField">
+						<label class="control-label requiredField" for="date"> Date
+							<span class="asteriskField">
         *
-       </span> </label>
-						<input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" /> </div>
+       </span>
+						</label>
+						<input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" />
+					</div>
 					<div class="form-group ">
-						<label class="control-label requiredField" for="Hour"> Select Hour <span class="asteriskField">
+						<label class="control-label requiredField" for="Hour"> Select Hour
+							<span class="asteriskField">
         *
-       </span> </label>
+       </span>
+						</label>
 						<select class="select form-control" id="Hour" name="Hour">
+							<option value="24"> 24 </option>
+							<option value="23"> 23 </option>
+							<option value="22"> 22 </option>
+							<option value="21"> 21 </option>
+							<option value="20"> 20 </option>
+							<option value="19"> 19 </option>
+							<option value="18"> 18 </option>
+							<option value="17"> 17 </option>
+							<option value="16"> 16 </option>
+							<option value="15"> 15 </option>
+							<option value="14"> 14 </option>
+							<option value="13"> 13 </option>
 							<option value="12"> 12 </option>
 							<option value="11"> 11 </option>
 							<option value="10"> 10 </option>
@@ -67,30 +88,17 @@
 						</select>
 					</div>
 					<div class="form-group ">
-						<label class="control-label requiredField" for="Min"> Select Min <span class="asteriskField">
+						<label class="control-label requiredField" for="Min"> Select Min
+							<span class="asteriskField">
         *
-       </span> </label>
+       </span>
+						</label>
 						<select class="select form-control" id="Min" name="Min">
 							<option value="00"> 00 </option>
 							<option value="15"> 15 </option>
 							<option value="30"> 30 </option>
 							<option value="45"> 45 </option>
 						</select>
-					</div>
-					<div class="form-group ">
-						<label class="control-label requiredField"> Time of Day <span class="asteriskField">
-        *
-       </span> </label>
-						<div class="">
-							<div class="radio">
-								<label class="radio">
-									<input name="radio" type="radio" value="AM" /> AM </label>
-							</div>
-							<div class="radio">
-								<label class="radio">
-									<input name="radio" type="radio" value="PM" /> PM </label>
-							</div>
-						</div>
 					</div>
 					<div class="form-group">
 						<div>
