@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
 
 class Location(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(length=30), nullable=False, unique=True)
+    name = db.Column(db.String(length=30), nullable=False)
     infection = db.Column(db.Float(), nullable=False, default=0.0)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
