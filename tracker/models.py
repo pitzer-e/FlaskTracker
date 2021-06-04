@@ -29,12 +29,13 @@ class User(db.Model, UserMixin):
 
 
 class Location(db.Model):
-    location_id = db.Column(db.Integer(), primary_key=True)
-    location_name = db.Column(db.String(length=30), nullable=False, unique=True)
-    location_addr = db.Column(db.String(length=30), nullable=False, unique=True)
-    location_infection = db.Column(db.Float(), nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(length=30), nullable=False, unique=True)
+    infection = db.Column(db.Float(), nullable=False, default=0.0)
+    owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
 
 class Date(db.Model):
-    create_day = db.Column(db.Date(), nullable=False, default=db.Date(), primary_key=True)
-    create_time = db.Column(db.Time(), default=db.Time(), nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    datetime = db.Column(db.Date(), default='2020-01-01 12:00')
+    owner = db.Column(db.Integer(), db.ForeignKey('user.id'))

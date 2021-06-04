@@ -1,9 +1,10 @@
 from tracker import app
 from flask import render_template, redirect, url_for, flash, request
-from tracker.models import User
+from tracker.models import *
 from tracker.forms import RegisterForm, LoginForm, EnterDataForm
 from tracker import db
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
+from datetime import datetime
 
 
 @app.route('/')
@@ -16,8 +17,28 @@ def home_page():
 @login_required
 def data_page():
     data_form = EnterDataForm()
-    if data_form.validate_on_submit():
-        print(request.form)
+    if request.method == "POST":
+        location = request.form.get('Location')
+        hour = request.form.get('Hour')
+        minute = request.form.get('Min')
+        form_date = request.form.get('date')
+
+        date_split = form_date.split('/')
+        python_date = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1]), int(hour), int(minute))
+
+        #   create a location
+        location_to_create = Location(name=location,
+                                      owner=current_user.id)
+
+        #   create a date
+        date_to_create = Date(datetime=python_date,
+                              owner=current_user.id)
+
+        #   commit to database
+        db.session.add(location_to_create)
+        db.session.add(date_to_create)
+        db.session.commit()
+
     return render_template('data.html', data_form=data_form)
 
 
