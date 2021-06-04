@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     last = db.Column(db.String(length=30), nullable=False)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
-    is_infected = db.Column(db.Boolean(), nullable=False, default=False)
+    infection_probability = db.Column(db.Float(), nullable=False, default=0)
     id = db.Column(db.Integer(), primary_key=True)
 
     @property
