@@ -52,11 +52,20 @@ def report_page():
 @app.route('/admin')
 @login_required
 def admin_page():
+    admin_form = EnterDataForm()
 
+    #   first check, is the user an admin?
     if current_user.username == 'admin':
-        users = User.query.all()
-        return render_template('admin.html', users=users)
 
+        if request.method == "POST":
+            value = request.form.get('Value')
+            return redirect(url_for('admin_page'))
+
+        if request.method == "GET":
+            users = User.query.all()
+            return render_template('admin.html', admin_form=admin_form, users=users)
+
+    #   if not an admin, give them the boot
     else:
         flash(f'The account {current_user.username} does not have adequate privileges for this page', category='danger')
         return redirect(url_for('home_page'))
