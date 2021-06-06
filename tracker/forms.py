@@ -28,5 +28,10 @@ class LoginForm(FlaskForm):
 
 
 class EnterDataForm(FlaskForm):
+    #   check to see if there is already a username with the provided data in the database
+    def validate_username(self, username_to_check):
+        user = User.query.filter_by(username=username_to_check.data).first()
+        if user:
+            raise ValidationError('Username already exists! Please try a different username')
     submit = SubmitField(label='Enter Data')
 

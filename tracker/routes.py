@@ -49,7 +49,7 @@ def report_page():
     return render_template('report.html')
 
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin_page():
     admin_form = EnterDataForm()
@@ -58,8 +58,21 @@ def admin_page():
     if current_user.username == 'admin':
 
         if request.method == "POST":
-            value = request.form.get('Value')
-            return redirect(url_for('admin_page'))
+            form_value = request.form.get('locationVal')
+            form_location = request.form.get('Location')
+
+            if admin_form.validate_on_submit():
+                location = db.session.query(Location).filter(Location.name == form_location).one()
+                location.infection = float(form_value)
+                db.session.commit()
+
+                flash(f'Location {form_location} updated successfully!', category='success')
+                return redirect(url_for('admin_page'))
+
+            if admin_form.errors != {}:
+                for err_msg in admin_form.errors.values():
+                    flash(f'There was an error with creating a user: {err_msg}', category='danger')
+                return redirect(url_for('admin_page'))
 
         if request.method == "GET":
             users = User.query.all()

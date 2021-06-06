@@ -1,144 +1,125 @@
 {% extends 'base.html' %}
 
+<!-- The Title of the Web Page -->
 {% block title %}
     Data Page
 {% endblock %}
 
+<!-- All of the content for the Data HTML Page -->
 {% block content %}
 
-    <style>
-        .bootstrap-iso .formden_header h2,
-        .bootstrap-iso .formden_header p,
-        .bootstrap-iso form {
-            font-family: Arial, Helvetica, sans-serif;
-            color: white
-        }
+<style>
+    .bootstrap-iso .formden_header h2,
+    .bootstrap-iso .formden_header p,
+    .bootstrap-iso form {
+        font-family: Arial, Helvetica, sans-serif;
+        color: white
+    }
 
-        .bootstrap-iso form button,
-        .bootstrap-iso form button:hover {
-            color: white !important;
-        }
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
 
-        .asteriskField {
-            color: red;
-        }
-    </style>
+    .asteriskField {
+        color: red;
+    }
+</style>
 
-    <div class="row" style="margin-top:20px; margin-left:20px">
-        <div class="col-8">
-            <h2>Enter A Location</h2>
-            <p>Please fill out the form to monitor covid information</p>
-            <br>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <form method="POST">
-                            {{ data_form.hidden_tag() }}
+<div class="row" style="margin-top:20px; margin-left:20px">
+    <div class="col-8">
+        <h2>Enter A Location</h2>
+        <p>Please fill out the form to monitor covid information</p>
+        <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <form method="POST">
+                        {{ data_form.hidden_tag() }}
 
-                            <div class="form-group ">
-                                <label class="control-label requiredField" for="Location"> Choose A Location
-                                    <span class="asteriskField">
-        *
-       </span>
-                                </label>
-                                <select class="select form-control" id="Location" name="Location">
-                                    <option value="Eastern Oregon University"> Eastern Oregon University </option>
-                                    <option value="Anytime Fitness"> Anytime Fitness </option>
-                                    <option value="Safeway"> Safeway </option>
-                                    <option value="D&amp;B Supply"> D&amp;B Supply </option>
-                                    <option value="Wal-Mart"> Wal-Mart </option>
-                                    <option value="Bi-Mart"> Bi-Mart </option>
-                                    <option value="Riverside Park"> Riverside Park </option>
-                                    <option value="Granada Theatre"> Granada Theatre </option>
-                                    <option value="Public Pool"> Public Pool </option>
-                                    <option value="Max Square"> Max Square </option>
-                                </select>
+                        <div class="form-group ">
+                            <label class="control-label requiredField" for="Location"> Choose A Location
+                                <span class="asteriskField">
+                                    *
+                                </span>
+                            </label>
+                            <select class="select form-control" id="Location" name="Location">
+                                <option value="Eastern Oregon University"> Eastern Oregon University </option>
+                                <option value="Anytime Fitness"> Anytime Fitness </option>
+                                <option value="Safeway"> Safeway </option>
+                                <option value="D&amp;B Supply"> D&amp;B Supply </option>
+                                <option value="Wal-Mart"> Wal-Mart </option>
+                                <option value="Bi-Mart"> Bi-Mart </option>
+                                <option value="Riverside Park"> Riverside Park </option>
+                                <option value="Granada Theatre"> Granada Theatre </option>
+                                <option value="Public Pool"> Public Pool </option>
+                                <option value="Max Square"> Max Square </option>
+                            </select>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label requiredField" for="date"> Date
+                                <span class="asteriskField">
+                                    *
+                                </span>
+                            </label>
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label requiredField" for="Hour"> Select Hour
+                                <span class="asteriskField">
+                                    *
+                                </span>
+                            </label>
+                            <select class="select form-control" id="Hour" name="Hour">
+                                {% for i in range(24) %}
+                                <option value="{{ i }}"> {{ i }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label requiredField" for="Min"> Select Min
+                                <span class="asteriskField">
+                                    *
+                                </span>
+                            </label>
+                            <select class="select form-control" id="Min" name="Min">
+                                <option value="00"> 00 </option>
+                                <option value="15"> 15 </option>
+                                <option value="30"> 30 </option>
+                                <option value="45"> 45 </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                {{ data_form.submit( class="btn btn-primary btn-block")}}
                             </div>
-                            <div class="form-group ">
-                                <label class="control-label requiredField" for="date"> Date
-                                    <span class="asteriskField">
-        *
-       </span>
-                                </label>
-                                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" />
-                            </div>
-                            <div class="form-group ">
-                                <label class="control-label requiredField" for="Hour"> Select Hour
-                                    <span class="asteriskField">
-        *
-       </span>
-                                </label>
-                                <select class="select form-control" id="Hour" name="Hour">
-                                    <option value="23"> 23 </option>
-                                    <option value="22"> 22 </option>
-                                    <option value="21"> 21 </option>
-                                    <option value="20"> 20 </option>
-                                    <option value="19"> 19 </option>
-                                    <option value="18"> 18 </option>
-                                    <option value="17"> 17 </option>
-                                    <option value="16"> 16 </option>
-                                    <option value="15"> 15 </option>
-                                    <option value="14"> 14 </option>
-                                    <option value="13"> 13 </option>
-                                    <option value="12"> 12 </option>
-                                    <option value="11"> 11 </option>
-                                    <option value="10"> 10 </option>
-                                    <option value="09"> 09 </option>
-                                    <option value="08"> 08 </option>
-                                    <option value="07"> 07 </option>
-                                    <option value="06"> 06 </option>
-                                    <option value="05"> 05 </option>
-                                    <option value="04"> 04 </option>
-                                    <option value="03"> 03 </option>
-                                    <option value="02"> 02 </option>
-                                    <option value="01"> 01 </option>
-                                    <option value="00"> 00 </option>
-                                </select>
-                            </div>
-                            <div class="form-group ">
-                                <label class="control-label requiredField" for="Min"> Select Min
-                                    <span class="asteriskField">
-        *
-       </span>
-                                </label>
-                                <select class="select form-control" id="Min" name="Min">
-                                    <option value="00"> 00 </option>
-                                    <option value="15"> 15 </option>
-                                    <option value="30"> 30 </option>
-                                    <option value="45"> 45 </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div>
-                                    {{ data_form.submit( class="btn btn-primary btn-block")}}
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- The Entered Locations Column -->
-        <div class="col-4">
-            <h2>Entered Locations</h2>
-            <p>Below is a list of previously visited locations</p>
-            <br>
-            <div class="row">
-                {% for owned_location in owned_locations %}
-                    <div class="col-md-6">
-                        <div style="margin-bottom: 5px" class="card text-left bg-dark">
-                            <div class="card-body">
-                                {{ owned_location.name }}
-                                <br>
-                                {{ owned_location.date }}
-                                <br>
-                                {{ owned_location.time }}
-                            </div>
-                        </div>
+    <!-- The Entered Locations Column -->
+    <div class="col-4">
+        <h2>Entered Locations</h2>
+        <p>Below is a list of previously visited locations</p>
+        <br>
+        <div class="row">
+            {% for owned_location in owned_locations %}
+            <div class="col-md-6">
+                <div style="margin-bottom: 5px" class="card text-left bg-dark">
+                    <div class="card-body">
+                        {{ owned_location.name }}
+                        <br>
+                        {{ owned_location.date }}
+                        <br>
+                        {{ owned_location.time }}
                     </div>
-                {% endfor %}
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}
