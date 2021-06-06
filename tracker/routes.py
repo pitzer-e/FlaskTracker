@@ -52,8 +52,14 @@ def report_page():
 @app.route('/admin')
 @login_required
 def admin_page():
-    users = User.query.all()
-    return render_template('admin.html', users=users)
+
+    if current_user.username == 'admin':
+        users = User.query.all()
+        return render_template('admin.html', users=users)
+
+    else:
+        flash(f'The account {current_user.username} does not have adequate privileges for this page', category='danger')
+        return redirect(url_for('home_page'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
