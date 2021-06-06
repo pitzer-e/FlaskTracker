@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     last = db.Column(db.String(length=30), nullable=False)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
+    is_infected = db.Column(db.Boolean(), nullable=False, default=False)
     infection_probability = db.Column(db.Float(), nullable=False, default=0)
     id = db.Column(db.Integer(), primary_key=True)
 
@@ -33,9 +34,5 @@ class Location(db.Model):
     name = db.Column(db.String(length=30), nullable=False)
     infection = db.Column(db.Float(), nullable=False, default=0.0)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
-
-
-class Date(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    datetime = db.Column(db.Date(), default='2020-01-01 12:00')
-    owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    date = db.Column(db.Date(), default='2020-01-01 12:00')
+    time = db.Column(db.Time(), default='00:00')

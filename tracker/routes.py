@@ -4,7 +4,7 @@ from tracker.models import *
 from tracker.forms import RegisterForm, LoginForm, EnterDataForm
 from tracker import db
 from flask_login import login_user, logout_user, login_required, current_user
-from datetime import datetime
+from datetime import date, time
 
 
 @app.route('/')
@@ -24,22 +24,23 @@ def data_page():
         form_date = request.form.get('date')
 
         date_split = form_date.split('/')
-        python_date = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1]), int(hour), int(minute))
-
+        python_date = date(int(date_split[2]), int(date_split[0]), int(date_split[1]))
+        python_time = time(int(hour), int(minute))
         #   create a location
         location_to_create = Location(name=location,
-                                      owner=current_user.id)
-
-        #   create a date
-        date_to_create = Date(datetime=python_date,
-                              owner=current_user.id)
+                                      owner=current_user.id,
+                                      date=python_date,
+                                      time=python_time)
 
         #   commit to database
         db.session.add(location_to_create)
-        db.session.add(date_to_create)
         db.session.commit()
+        flash('Location and date added successfully!', category='success')
+        return redirect(url_for('data_page'))
 
-    return render_template('data.html', data_form=data_form)
+    if request.method == "GET":
+        owned_locations = Location.query.filter_by(owner=current_user.id)
+        return render_template('data.html', data_form=data_form, owned_locations=owned_locations)
 
 
 @app.route('/report')
