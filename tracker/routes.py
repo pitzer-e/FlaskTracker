@@ -121,7 +121,11 @@ def login_page():
             login_user(attempted_user)
             flash(f'Login success: You are logged in as: {attempted_user.username}', category='success')
 
-            return redirect(url_for('home_page'))
+            if attempted_user.username == 'admin':
+                return redirect(url_for('admin_page'))
+
+            else:
+                return redirect(url_for('home_page'))
 
         else:
 

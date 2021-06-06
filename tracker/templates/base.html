@@ -16,9 +16,13 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"> <span class="navbar-toggler-icon"></span> </button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"> <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{{ url_for('data_page') }}">Data</a> </li>
-				<li class="nav-item"> <a class="nav-link" href="{{ url_for('report_page') }}">Report</a> </li>
+
+                {% if current_user.username != 'admin' %}
+ 				    <li class="nav-item active"> <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a> </li>
+				    <li class="nav-item"> <a class="nav-link" href="{{ url_for('data_page') }}">Data</a> </li>
+				    <li class="nav-item"> <a class="nav-link" href="{{ url_for('report_page') }}">Report</a> </li>
+                {% endif %}
+
 
                 <!-- simple hide of admin page behind if...how to authenticate?? -->
                 {% if current_user.username == 'admin' %}
