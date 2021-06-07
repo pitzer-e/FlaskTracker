@@ -58,25 +58,31 @@ def admin_page():
     if current_user.username == 'admin':
 
         if request.method == "POST":
-            form_value = request.form.get('locationVal')
-            form_location = request.form.get('Location')
+            if request.form.get("submit_a"):
+                form_value = request.form.get('locationVal')
+                form_location = request.form.get('Location')
 
-            if admin_form.validate_on_submit():
-                location = db.session.query(Location).filter(Location.name == form_location).one()
-                location.infection = float(form_value)
+                Location.query.filter_by(name=form_location).update({Location.infection: form_value})
                 db.session.commit()
-
                 flash(f'Location {form_location} updated successfully!', category='success')
-                return redirect(url_for('admin_page'))
 
-            if admin_form.errors != {}:
-                for err_msg in admin_form.errors.values():
-                    flash(f'There was an error with creating a user: {err_msg}', category='danger')
-                return redirect(url_for('admin_page'))
+            elif request.form.get("submit_b"):
+                form_user = request.form.get('userID')
+                form_infected = request.form.get('options')
+
+                if form_infected == 'infected':
+                    User.query.filter_by(id=form_user).update({User.is_infected: True})
+                else:
+                    User.query.filter_by(id=form_user).update({User.is_infected: False})
+
+                db.session.commit()
+                flash(f'User {form_user} updated successfully!', category='success')
+            return redirect(url_for('admin_page'))
 
         if request.method == "GET":
+            locations = Location.query.all()
             users = User.query.all()
-            return render_template('admin.html', admin_form=admin_form, users=users)
+            return render_template('admin.html', admin_form=admin_form, users=users, locations=locations)
 
     #   if not an admin, give them the boot
     else:
