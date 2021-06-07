@@ -1,5 +1,3 @@
-import sqlalchemy.exc
-
 from tracker import app
 from flask import render_template, redirect, url_for, flash, request
 from tracker.models import *
