@@ -1,3 +1,5 @@
+import sqlalchemy.exc
+
 from tracker import app
 from flask import render_template, redirect, url_for, flash, request
 from tracker.models import *
@@ -57,26 +59,37 @@ def admin_page():
     #   first check, is the user an admin?
     if current_user.username == 'admin':
 
+        #   is this a post request??
         if request.method == "POST":
+
+            #   if so, is it an update location call??
             if request.form.get("submit_a"):
                 form_value = request.form.get('locationVal')
                 form_location = request.form.get('Location')
 
-                Location.query.filter_by(name=form_location).update({Location.infection: form_value})
-                db.session.commit()
-                flash(f'Location {form_location} updated successfully!', category='success')
+                try:
+                    Location.query.filter_by(name=form_location).update({Location.infection: form_value})
+                    db.session.commit()
+                    flash(f'Location {form_location} updated successfully!', category='success')
+                except Exception:
+                    flash('Bad entry. Please try again', category='danger')
 
+            #   or perhaps it is an update user call?
             elif request.form.get("submit_b"):
                 form_user = request.form.get('userID')
                 form_infected = request.form.get('options')
 
-                if form_infected == 'infected':
-                    User.query.filter_by(id=form_user).update({User.is_infected: True})
-                else:
-                    User.query.filter_by(id=form_user).update({User.is_infected: False})
+                try:
+                    if form_infected == 'infected':
+                        User.query.filter_by(id=form_user).first().update({User.is_infected: True})
+                    else:
+                        User.query.filter_by(id=form_user).first().update({User.is_infected: False})
 
-                db.session.commit()
-                flash(f'User {form_user} updated successfully!', category='success')
+                    db.session.commit()
+                    flash(f'User {form_user} updated successfully!', category='success')
+                except Exception:
+                    flash(f'Bad entry with user: {form_user}. Please try again', category='danger')
+
             return redirect(url_for('admin_page'))
 
         if request.method == "GET":
