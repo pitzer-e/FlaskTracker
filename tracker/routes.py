@@ -82,8 +82,10 @@ def admin_page():
                 try:
                     if form_infected == 'infected':
                         db.session.query(User).filter(User.id == form_user).first().is_infected = True
+                        db.session.query(User).filter(User.id == form_user).first().infection_chance = 100
                     else:
                         db.session.query(User).filter(User.id == form_user).first().is_infected = False
+                        db.session.query(User).filter(User.id == form_user).first().infection_chance = 0
 
                     db.session.commit()
                     flash(f'User {form_user} updated successfully!', category='success')
