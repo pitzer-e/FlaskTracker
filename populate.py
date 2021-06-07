@@ -35,8 +35,9 @@ def create_data(number):
     #   generate a random location
     places = ['Max Square', 'Public Pool', 'Granada Theatre', 'Riverside Park', 'Bi-Mart',
               'Wal-Mart', 'D&B Supply', 'Safeway', 'Anytime Fitness', 'Eastern Oregon University']
-    random_infection = random.randrange(101)
-    random_place = places[random.randrange(10)]
+    random_value = random.randrange(10)
+    random_place = places[random_value]
+    random_infection = infections[random_value]
 
     location_to_create = Location(name=random_place,
                                   date=random_date,
@@ -49,6 +50,9 @@ def create_data(number):
 
 print("How many test users do you want to create?")
 no_users = input()
+infections = [random.randrange(101), random.randrange(101), random.randrange(101), random.randrange(101),
+              random.randrange(101), random.randrange(101), random.randrange(101), random.randrange(101),
+              random.randrange(101), random.randrange(101)]
 print(f"Creating {no_users} users. Please wait...")
 populate_database(int(no_users))
 print("Finished!")
