@@ -7,5 +7,9 @@
 
 <!-- All of the content for the Report HTML Page -->
 {% block content %}
-    This is our content for the Report Page
+    <body class="text-center">
+        <h1>Report for {{ current_user.username }}</h1>
+        {{ user_infect_prob }}
+
+    </body>
 {% endblock %}

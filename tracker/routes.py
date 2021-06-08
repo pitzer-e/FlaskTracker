@@ -46,7 +46,9 @@ def data_page():
 @app.route('/report')
 @login_required
 def report_page():
-    return render_template('report.html')
+    user_infect_prob = current_user.infection_chance
+    locations = Location.query.filter_by(owner=current_user.id)
+    return render_template('report.html', user_infect_prob=user_infect_prob, locations=locations)
 
 
 @app.route('/admin', methods=['GET', 'POST'])
