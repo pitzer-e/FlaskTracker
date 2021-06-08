@@ -49,23 +49,31 @@ def data_page():
 def report_page():
     report_form = EnterDataForm()
 
-    if request.method == "POST":
-        graph = Graph()
-        entered_date = request.form.get('Date')
-        infected_user = User.query.filter_by(is_infected=True).first()
+    try:
+        if request.method == "POST":
+            graph = Graph()
+            entered_date = request.form.get('Date')
+            infected_user = User.query.filter_by(is_infected=True).first()
 
-        flash(f'User ID of infected user: {infected_user.id}', category='info')
+            flash(f'User ID of infected user: {infected_user.id}', category='info')
 
-        record = Location.query.filter_by(date=entered_date).all()
+            record = Location.query.filter_by(date=entered_date).all()
 
-        for i, obj1 in enumerate(record):
-            for j in range(i + 1, len(record)):
-                obj2 = record[j]
-                if obj1.name == obj2.name and obj1.time > obj2.time:
-                    graph.add_edge(obj1.owner, obj2.owner)
+            #   algorithm that adds people to graph if in same area at same time
+            for i, obj1 in enumerate(record):
+                for j in range(i + 1, len(record)):
+                    obj2 = record[j]
+                    if obj1.name == obj2.name and obj1.time > obj2.time:
+                        current_user.infection_chance = obj1.infection
+                        graph.add_edge(obj1.owner, obj2.owner)
 
-        graph.dfs(infected_user.id)
+            print('Printing connections from infected individual to users for the day:')
+            graph.dfs(infected_user.id)
 
+            return redirect(url_for('report_page'))
+
+    except Exception:
+        flash(f'Error in generating report...no infected user?', category='danger')
         return redirect(url_for('report_page'))
 
     if request.method == "GET":

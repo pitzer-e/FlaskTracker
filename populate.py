@@ -23,7 +23,7 @@ def create_data(number):
 
     #   create a number of random dates and times for the user (up to 10 locations)
     count = 0
-    while random.randrange(5):
+    while random.randrange(10):
         #   specify date range
         start_date = datetime.date(2021, 1, 1)
         end_date = datetime.date(2021, 1, 8)
