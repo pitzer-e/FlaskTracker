@@ -7,9 +7,26 @@
 
 <!-- All of the content for the Report HTML Page -->
 {% block content %}
-    <body class="text-center">
-        <h1>Report for {{ current_user.username }}</h1>
-        {{ user_infect_prob }}
-
-    </body>
+<div class="row" style="margin-top:20px; margin-left:20px">
+    <div class="col-4">
+        <h2>Report for {{ current_user.username }}</h2>
+        <p>Below is a list of previously visited locations</p>
+        <br>
+        <div class="row">
+            {% for owned_location in owned_locations %}
+            <div class="col-md-6">
+                <div style="margin-bottom: 5px" class="card text-left bg-dark">
+                    <div class="card-body">
+                        {{ owned_location.name }}
+                        <br>
+                        {{ owned_location.date }}
+                        <br>
+                        {{ owned_location.time }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
