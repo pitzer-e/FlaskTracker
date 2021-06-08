@@ -34,6 +34,7 @@ class EnterDataForm(FlaskForm):
         if user:
             raise ValidationError('Username already exists! Please try a different username')
     enter_data = SubmitField(label='Enter Data')
+    request = SubmitField(label='Request Info')
     update_user = SubmitField(label='Update User')
     update_location = SubmitField(label='Update Location')
 

@@ -46,9 +46,14 @@ def data_page():
 @app.route('/report')
 @login_required
 def report_page():
-    user_infect_prob = current_user.infection_chance
-    locations = Location.query.filter_by(owner=current_user.id)
-    return render_template('report.html', user_infect_prob=user_infect_prob, locations=locations)
+    report_form = EnterDataForm()
+    if request.method == "POST":
+
+        return redirect(url_for('report_page'))
+
+    if request.method == "GET":
+        owned_locations = Location.query.filter_by(owner=current_user.id)
+        return render_template('report.html', report_form=report_form, owned_locations=owned_locations)
 
 
 @app.route('/admin', methods=['GET', 'POST'])

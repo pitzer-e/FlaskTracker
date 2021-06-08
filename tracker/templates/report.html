@@ -5,28 +5,79 @@
     Report Page
 {% endblock %}
 
-<!-- All of the content for the Report HTML Page -->
 {% block content %}
+<style>
+    .bootstrap-iso .formden_header h2,
+    .bootstrap-iso .formden_header p,
+    .bootstrap-iso form {
+        font-family: Arial, Helvetica, sans-serif;
+        color: white
+    }
+
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
+
+    .asteriskField {
+        color: red;
+    }
+</style>
+
 <div class="row" style="margin-top:20px; margin-left:20px">
-    <div class="col-4">
-        <h2>Report for {{ current_user.username }}</h2>
-        <p>Below is a list of previously visited locations</p>
+    <div class="col-6">
+        <h2>Generate an infection chance report</h2>
+        <p>Select a day and then submit data</p>
+        <br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <form method="POST">
+                        {{ report_form.hidden_tag() }}
+
+                        <div class="form-group ">
+                            <label class="control-label requiredField" for="Date"> Choose A Day
+                                <span class="asteriskField">
+                                    *
+                                </span>
+                            </label>
+                            <select class="select form-control" id="Date" name="Date">
+                                {% for owned_location in owned_locations %}
+                                <option value="{{ owned_location.date }}"> {{ owned_location.date }} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <div>
+                                {{ report_form.request( class="btn btn-primary btn-block")}}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report output -->
+    <div class="col-6">
+        <h2>Percent chance infection: {{ current_user.infection_chance }}</h2>
+        <p>Below is a graph by shortest distance</p>
         <br>
         <div class="row">
-            {% for owned_location in owned_locations %}
             <div class="col-md-6">
                 <div style="margin-bottom: 5px" class="card text-left bg-dark">
                     <div class="card-body">
-                        {{ owned_location.name }}
+                        <h5>Place holder 1</h5>
                         <br>
-                        {{ owned_location.date }}
+                        <h5>Place holder 2</h5>
                         <br>
-                        {{ owned_location.time }}
+                        <h5>Place holder 3</h5>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
+
 </div>
 {% endblock %}
