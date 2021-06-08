@@ -5,6 +5,7 @@ from tracker.forms import RegisterForm, LoginForm, EnterDataForm
 from tracker import db
 from flask_login import login_user, logout_user, login_required, current_user
 from datetime import date, time
+from tracker.graph import Graph
 
 
 @app.route('/')
@@ -43,16 +44,33 @@ def data_page():
         return render_template('data.html', data_form=data_form, owned_locations=owned_locations)
 
 
-@app.route('/report')
+@app.route('/report', methods=['GET', 'POST'])
 @login_required
 def report_page():
     report_form = EnterDataForm()
+
     if request.method == "POST":
+        graph = Graph()
+        entered_date = request.form.get('Date')
+        infected_user = User.query.filter_by(is_infected=True).first()
+
+        flash(f'User ID of infected user: {infected_user.id}', category='info')
+
+        record = Location.query.filter_by(date=entered_date).all()
+
+        for i, obj1 in enumerate(record):
+            for j in range(i + 1, len(record)):
+                obj2 = record[j]
+                if obj1.name == obj2.name and obj1.time > obj2.time:
+                    graph.add_edge(obj1.owner, obj2.owner)
+
+        graph.dfs(infected_user.id)
 
         return redirect(url_for('report_page'))
 
     if request.method == "GET":
         owned_locations = Location.query.filter_by(owner=current_user.id)
+
         return render_template('report.html', report_form=report_form, owned_locations=owned_locations)
 
 
@@ -88,9 +106,11 @@ def admin_page():
                     if form_infected == 'infected':
                         db.session.query(User).filter(User.id == form_user).first().is_infected = True
                         db.session.query(User).filter(User.id == form_user).first().infection_chance = 100
+                        Location.query.filter_by(owner=form_user).update({Location.visited: True})
                     else:
                         db.session.query(User).filter(User.id == form_user).first().is_infected = False
                         db.session.query(User).filter(User.id == form_user).first().infection_chance = 0
+                        Location.query.filter_by(owner=form_user).update({Location.visited: False})
 
                     db.session.commit()
                     flash(f'User {form_user} updated successfully!', category='success')

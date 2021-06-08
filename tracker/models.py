@@ -36,3 +36,4 @@ class Location(db.Model):
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
     date = db.Column(db.Date(), default='2020-01-01 12:00')
     time = db.Column(db.Time(), default='00:00')
+    visited = db.Column(db.Boolean(), default=False)

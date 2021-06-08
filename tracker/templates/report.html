@@ -26,7 +26,7 @@
 
 <div class="row" style="margin-top:20px; margin-left:20px">
     <div class="col-6">
-        <h2>Generate an infection chance report</h2>
+        <h2>Generate report for User ID: {{ current_user.id }}</h2>
         <p>Select a day and then submit data</p>
         <br>
         <div class="container-fluid">
@@ -68,11 +68,7 @@
             <div class="col-md-6">
                 <div style="margin-bottom: 5px" class="card text-left bg-dark">
                     <div class="card-body">
-                        <h5>Place holder 1</h5>
-                        <br>
-                        <h5>Place holder 2</h5>
-                        <br>
-                        <h5>Place holder 3</h5>
+                        <h5>{{ output }}</h5>
                     </div>
                 </div>
             </div>
